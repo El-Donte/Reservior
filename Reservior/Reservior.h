@@ -19,11 +19,11 @@ public:
 
 	void SetName(const char* n);
 	void SetType(const char* t);
-	Reservior& GetName() { return *this; };
-	Reservior& GetType() { return *this; };
-	Reservior& GetWidth() { return *this; };
-	Reservior& GetLen() { return *this; };
-	Reservior& GetMaxDepth() { return *this; };
+	char* GetName() { return this->name; };
+	char* GetType() { return this->type; };
+	double GetWidth() { return this->max_depth; };
+	double GetLen() { return this->max_depth; };
+	double GetMaxDepth() { return this->max_depth; };
 
 	double ReserviorV() const;
 	double ReserviorSquare() const;
