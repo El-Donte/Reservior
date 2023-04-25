@@ -3,28 +3,38 @@
 #include <fstream>
 
 
-Reservior::Reservior(const char* n, const char* t, const double w, const double l, const double md) :
+Reservior::Reservior(const char* n, const char* t, const double w, const double l, const  double md) :
 	name{(n)? new char[strlen(n)+1]: nullptr},
 	type{(t)? new char[strlen(n)+1]: nullptr},
-	width{w},len{l},max_depth{md}
+	width{w},
+	len{l},
+	max_depth{md}
 {
 	SetName(n);
 	SetType(t);
 }
+
 
 Reservior::Reservior():
 	Reservior(nullptr,nullptr,0,0,0)
 {}
 
 Reservior::Reservior(const Reservior& reser)
-{
-	if (type) delete[]type;
-	type = new char[strlen(reser.type) + 1];
-	strcpy_s(type, strlen(reser.type) + 1, reser.type);
-
-	if (name) delete[]name;
+{	
 	name = new char[strlen(reser.name) + 1];
-	strcpy_s(name, strlen(reser.name) + 1, reser.name);
+	type = new char[strlen(reser.type) + 1];
+	if(reser.name){
+		if (name) delete[]name;
+		name = new char[strlen(reser.name) + 1];
+		strcpy_s(name, strlen(reser.name) + 1, reser.name);
+	}
+	
+	if(reser.type){
+		if (type) delete[]this->type;
+		type = new char[strlen(reser.type) + 1];
+		strcpy_s(type, strlen(reser.type) + 1, reser.type);
+	}
+	
 
 	width = reser.width;
 	len = reser.len;
@@ -79,7 +89,7 @@ Reservior Reservior::Add() {
 	std::cout << "Введите ширину: "; std::cin >> w; std::cout << "\n";
 	std::cout << "Введите длину: "; std::cin>>l; std::cout << "\n";
 	std::cout << "Введите макс глубину: "; std::cin>>md; std::cout << "\n";
-	return Reservior(n, t, w, l, md);
+	return Reservior(n,t,w,l,md);
 }
 
 void Reservior::Del(Reservior* resers, int index, int size) {
@@ -91,15 +101,12 @@ void Reservior::Del(Reservior* resers, int index, int size) {
 		resers[ii].max_depth = resers[ii + 1].max_depth;
 	}
 	delete[]resers[size - 1].name;
-	delete[]resers[size - 1].type;
-	delete &resers[size - 1].len;
-	delete &resers[size - 1].width;
-	delete &resers[size - 1].max_depth;
+	delete[]resers[size - 1].type;	
 }
 
 void Reservior::ShowReserviors() {
-	if (name) { std::cout << "название водоема: "; puts(name); } //std::cout << "\n"; }
-	if (type) { std::cout << "тип водоема: "; puts(type); }//std::cout << "\n"; }
+	if (name) { std::cout << "название водоема: "; puts(name); }//std::cout << "\n"; }
+	if (type) { std::cout << "тип водоема: "; puts(type); } //std::cout << "\n"; }
 	if(len){ std::cout << "длина водоема: "<< len; std::cout << "\n"; }
 	if(width){ std::cout << "ширина водоема: "<< width; std::cout << "\n"; }
 	if(max_depth){ std::cout << "макс глубина водоема: "<< max_depth; std::cout << "\n"; }
