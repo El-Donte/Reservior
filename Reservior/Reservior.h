@@ -9,7 +9,7 @@ class Reservior
 public: 
 	Reservior();
 	Reservior(const char* n, const char* t, const double w, const double l, const double md);
-	explicit Reservior(const Reservior& reser);
+	Reservior(const Reservior& reser);
 	~Reservior();
 
 	Reservior& operator=(const Reservior& reser);
